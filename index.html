@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Generator</title>
+</head>
+<body>
+    <div id="content">
+        <button id="color-button">Generate a random color</button>
+        <hr>
+        <p class="rgb">rgb value: rgb(42, 253, 188)</p>
+        <p class="hex">hex value: #92F3CC</p>
+    </div>
+    
+    
+<script>
+    colorButton = document.querySelector('#color-button')
+
+    function randomNum() {
+            return Math.floor(Math.random() * 256);
+        }
+
+    function rgbToHexPart(rgbPart) {
+        let hexPart = Number(rgbPart).toString(16);
+        if (hexPart.length < 2) {
+            hexPart = "0" + hexPart;
+        }
+        return hexPart;
+    }
+
+    function rgbToHexFull(r,g,b) {
+        let red = rgbToHexPart(r);
+        let green = rgbToHexPart(g);
+        let blue = rgbToHexPart(b);
+        return `#${red}${green}${blue}`;
+    }
+
+    colorButton.addEventListener('click', (e) => {
+            color = document.querySelector('.rgb');
+            hex = document.querySelector('.hex');
+            body = document.querySelector('body');
+
+            let red = randomNum();
+            let green = randomNum();
+            let blue = randomNum();
+            
+            body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`
+
+            color.textContent = `rgb value: ${body.style.backgroundColor}`;
+            hex.textContent = 'hex value: ' + `${rgbToHexFull(red,green,blue)}`.toUpperCase()
+        });
+
+</script>
+
+<style>
+    body {
+        display: grid;
+        justify-content: center;
+        padding-top: 150px;
+        font-size: 20px;
+        background-color: #92F3CC
+    }
+
+    #content {
+        display: inline-block;
+        justify-content: center;
+        padding: 20px;
+        background-color: white;
+        border-radius: 15px;
+        height: 150px;
+        width: 420px;
+    }
+
+    #color-button {
+        width: 420px;
+        height: 50px;
+        font-size: 20px
+    }
+</style>
+</body>
+</html>
